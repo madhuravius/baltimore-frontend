@@ -1,0 +1,14 @@
+language: node_js
+dist: trusty
+node_js: "12.2"
+cache:
+  yarn: true
+  directories:
+    - node_modules
+sudo: false
+install:
+  - yarn
+script:
+  - make lint
+  - make test
+  - make build
