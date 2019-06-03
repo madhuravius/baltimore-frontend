@@ -2,10 +2,11 @@
   "env": {
     "browser": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 9,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -15,6 +16,11 @@
     "airbnb"
   ],
   "rules": {
+    "prefer-destructuring": ["error", {
+      "array": true,
+      "object": true
+    }],
+    "import/prefer-default-export": "off",
     "func-names": ["error", "never"],
     "react/jsx-filename-extension": [0]
   }
