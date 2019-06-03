@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { fromJS } from 'immutable';
 import ReactMapGL, { NavigationControl } from 'react-map-gl';
