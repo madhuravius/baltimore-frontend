@@ -1,3 +1,1 @@
-import * as mapVisualization from './mapVisualization';
-
-module.exports.MapVisualization = mapVisualization;
+export { default as MapVisualization } from './mapVisualization';

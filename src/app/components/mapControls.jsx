@@ -38,7 +38,7 @@ export default class MapControls extends Component {
               selectedValue={this.props.mapType}
               id="map-type"
             >
-              <Radio label="Points" name="input-points" value="points" />
+              <Radio label="Points" name="input-points" value="circle" />
               <Radio label="Heatmap" name="input-heatmap" value="heatmap" />
             </RadioGroup>
           </FormGroup>
@@ -51,7 +51,7 @@ export default class MapControls extends Component {
         <br />
         <div>
           <ButtonGroup fill>
-            <Button icon="reset" className="bp3-button bp3-intent-danger">Reset</Button>
+            <Button icon="reset" className="bp3-button bp3-intent-danger" onClick={this.props.handleMapReset}>Reset</Button>
             <Button icon="arrow-right" className="bp3-button bp3-intent-success" onClick={this.props.handleMapUpdate}>Submit</Button>
           </ButtonGroup>
         </div>
@@ -71,6 +71,7 @@ MapControls.propTypes = {
   endDate: PropTypes.instanceOf(Date),
   handleFormChange: PropTypes.func,
   handleMapUpdate: PropTypes.func,
+  handleMapReset: PropTypes.func,
 };
 
 MapControls.defaultProps = {
@@ -86,4 +87,5 @@ MapControls.defaultProps = {
   endDate: new Date(),
   handleFormChange: () => {},
   handleMapUpdate: () => {},
+  handleMapReset: () => {},
 };

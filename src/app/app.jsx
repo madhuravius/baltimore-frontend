@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { mapsActions } from '../actions';
-import { mapsProps } from '../props';
 import { MapVisualization } from './containers';
+import { mapsProps } from '../props';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,7 +17,7 @@ class App_ extends Component {
 
   render() {
     return (
-      <MapVisualization.default
+      <MapVisualization
         title="Baltimore Public Safety"
         data={this.props.arrests}
       />

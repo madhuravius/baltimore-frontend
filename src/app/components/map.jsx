@@ -9,6 +9,7 @@ import { mapsProps } from '../../props';
 import { defaultMapStyle, dataLayer } from '../../util/map';
 
 const { TOKEN } = commonConstants;
+const { CIRCLE_BORDER_COLOR, RGB_ARRESTS } = mapsConstants;
 
 export default class Map extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class Map extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.data) {
-      this.loadData(nextProps.data);
+      this.loadData(nextProps.data, nextProps.mapType);
     }
   }
 
@@ -39,10 +40,30 @@ export default class Map extends Component {
     return false;
   }
 
-  loadData(data) {
+  loadData(data, mapType) {
+    let styleAdditions = {
+      type: mapType,
+    };
+    if (mapType === 'circle') {
+      // handle some style additions for circle
+      styleAdditions = {
+        ...styleAdditions,
+        ...{
+          type: mapType,
+          paint: {
+            'circle-radius': 8,
+            'circle-opacity': 0.8,
+            'circle-color': RGB_ARRESTS,
+            'circle-stroke-color': CIRCLE_BORDER_COLOR,
+            'circle-stroke-width': 1,
+          },
+        },
+      };
+    }
+    const dataLayerToUse = fromJS({ ...dataLayer, ...styleAdditions });
     const mapStyle = defaultMapStyle
       .setIn(['sources', 'points'], fromJS({ type: 'geojson', data }))
-      .set('layers', defaultMapStyle.get('layers').push(dataLayer));
+      .set('layers', defaultMapStyle.get('layers').push(dataLayerToUse));
     this.setState({ mapStyle });
   }
 
@@ -73,6 +94,7 @@ export default class Map extends Component {
 Map.propTypes = {
   updateMap: PropTypes.bool,
   data: mapsProps.data,
+  mapType: PropTypes.string,
 };
 
 Map.defaultProps = {
@@ -81,4 +103,5 @@ Map.defaultProps = {
     features: [],
     type: '',
   },
+  mapType: 'heatmap',
 };
