@@ -5,10 +5,9 @@ import { bindActionCreators } from 'redux';
 
 import { mapsActions } from '../actions';
 import { mapsProps } from '../props';
-import { Map } from './containers';
+import { MapVisualization } from './containers';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-
 
 class App_ extends Component {
   componentDidMount() {
@@ -17,10 +16,10 @@ class App_ extends Component {
   }
 
   render() {
-    const { arrests } = this.props;
     return (
-      <Map.default
-        data={arrests}
+      <MapVisualization.default
+        title="Baltimore Public Safety"
+        data={this.props.arrests}
       />
     );
   }

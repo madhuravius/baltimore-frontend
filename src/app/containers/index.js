@@ -1,3 +1,3 @@
-import * as map from './map';
+import * as mapVisualization from './mapVisualization';
 
-export const Map = map;
+module.exports.MapVisualization = mapVisualization;

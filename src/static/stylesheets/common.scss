@@ -1,0 +1,17 @@
+body {
+  overflow-x: hidden;
+}
+
+$visualization_height: calc(100vh - (16px));
+.visualization-parent {
+  min-height: $visualization_height;
+  .visualization {
+    min-height: $visualization_height;
+    > div {
+      min-height: $visualization_height;
+    }
+    canvas {
+      min-height: $visualization_height;
+    }
+  }  
+}
