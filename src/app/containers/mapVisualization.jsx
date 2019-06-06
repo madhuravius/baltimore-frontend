@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
 import { get } from 'lodash';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import { mapsActions } from '../../actions';
 import { MapControls, Map } from '../components';
 import { mapsProps } from '../../props';
 
@@ -20,13 +23,18 @@ const DEFAULT_STATE = {
   updateMap: false,
 };
 
-export default class MapVisualization extends Component {
+class MapVisualization_ extends Component {
   constructor(props) {
     super(props);
     this.state = { ...DEFAULT_STATE };
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleMapReset = this.handleMapReset.bind(this);
     this.handleMapUpdate = this.handleMapUpdate.bind(this);
+  }
+
+  componentDidMount() {
+    const { getData } = this.props;
+    getData();
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -98,14 +106,38 @@ export default class MapVisualization extends Component {
   }
 }
 
-MapVisualization.propTypes = {
+MapVisualization_.propTypes = {
   title: PropTypes.string,
   data: mapsProps.data,
 };
-MapVisualization.defaultProps = {
+MapVisualization_.defaultProps = {
   title: '',
   data: {
     features: [],
     type: '',
   },
 };
+
+
+const mapStateToProps = state => ({
+  data: state.maps.data,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getData: mapsActions.getData,
+}, dispatch);
+
+MapVisualization_.propTypes = {
+  data: mapsProps.data,
+  getData: PropTypes.func,
+};
+MapVisualization_.defaultProps = {
+  data: {
+    features: [],
+    type: '',
+  },
+  getData: () => {},
+};
+
+const MapVisualization = connect(mapStateToProps, mapDispatchToProps)(MapVisualization_);
+export default MapVisualization;

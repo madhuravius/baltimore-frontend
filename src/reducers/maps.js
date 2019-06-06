@@ -10,7 +10,7 @@ export default function mapsReducers(state = initialState, action) {
     case mapsConstants.GET_ARRESTS:
       return {
         ...state,
-        arrests: action.data.results,
+        data: action.data.results,
       };
     default:
       return state;

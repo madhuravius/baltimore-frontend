@@ -1,49 +1,30 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { Route, Switch } from 'react-router-dom';
 
-import { mapsActions } from '../actions';
-import { MapVisualization } from './containers';
-import { mapsProps } from '../props';
+import {
+  Header, MapVisualization, RawData, SourcesAndMethods, Summary,
+} from './containers';
+import { commonConstants } from '../constants';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-class App_ extends Component {
-  componentDidMount() {
-    const { getArrestData } = this.props;
-    getArrestData();
-  }
-
+export default class App extends Component {
   render() {
     return (
-      <MapVisualization
-        title="Baltimore Public Safety"
-        data={this.props.arrests}
-      />
+      <div>
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route exact path={commonConstants.BASE_ROUTE} component={Summary} />
+            <Route path={commonConstants.MAP_ROUTE} component={MapVisualization} />
+            <Route path={commonConstants.DATA_VIEW_ROUTE} component={RawData} />
+            <Route
+              path={commonConstants.SOURCES_AND_METHODS_ROUTE}
+              component={SourcesAndMethods}
+            />
+          </Switch>
+        </div>
+      </div>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  arrests: state.maps.arrests,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  getArrestData: mapsActions.getArrestData,
-}, dispatch);
-
-App_.propTypes = {
-  arrests: mapsProps.data,
-  getArrestData: PropTypes.func,
-};
-App_.defaultProps = {
-  arrests: {
-    features: [],
-    type: '',
-  },
-  getArrestData: () => {},
-};
-
-const App = connect(mapStateToProps, mapDispatchToProps)(App_);
-export default App;

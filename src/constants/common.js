@@ -1,3 +1,10 @@
+// Routes
+export const BASE_ROUTE = '/';
+export const MAP_ROUTE = '/map';
+export const DATA_VIEW_ROUTE = '/data-view';
+export const SOURCES_AND_METHODS_ROUTE = '/sources-and-methods';
+
+export const PAGE_TITLE = 'Baltimore Data';
 export const BASE_URL = 'http://localhost:5050/';
 export const HTTP_ERROR = 'HTTP_ERROR';
 export const BAD_REQUEST = 400;

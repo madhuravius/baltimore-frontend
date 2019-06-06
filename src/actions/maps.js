@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { commonConstants, mapsConstants } from '../constants';
 
-export function getArrestData() {
+export function getData() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`${commonConstants.BASE_URL}${mapsConstants.API_GET_ARRESTS_URL}`);

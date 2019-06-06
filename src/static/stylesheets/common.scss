@@ -1,8 +1,12 @@
 body {
   overflow-x: hidden;
+  margin: 0;
+  div.content {
+    margin: $global-space;
+  }
 }
 
-$visualization_height: calc(100vh - (16px));
+$visualization_height: calc(100vh - 16px - 50px);
 .visualization-parent {
   min-height: $visualization_height;
   .visualization {
@@ -14,4 +18,29 @@ $visualization_height: calc(100vh - (16px));
       min-height: $visualization_height;
     }
   }  
+}
+
+.contact-form-overlay {
+  position: absolute;
+  left: 50vw;
+  width: 50vw;
+  top: 10vh;
+  margin-left: -25vw;
+  min-height: 30vh;
+  .contact-form-container {
+    display: block;
+    width: 100%;
+    .comments-parent .bp3-form-content {
+      width: 100%;
+    }
+    .comment-buttons{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      button {
+        margin: 0 $global-space;
+      }
+    }
+  }
 }
