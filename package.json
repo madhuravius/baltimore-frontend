@@ -30,7 +30,7 @@
     "bunyan-debug-stream": "^2.0.0",
     "dotenv": "^8.0.0",
     "flexboxgrid": "^6.3.1",
-    "http-proxy": "^1.17.0",
+    "http-proxy": "^1.18.1",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "mapbox-gl": "^1.0.0",
